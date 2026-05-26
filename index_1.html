@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T. 진주 | 영어 독해 퀴즈</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f7f3f3;font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+.hd{background:#fff;border-bottom:2px solid #fce4e4;padding:12px 16px;position:sticky;top:0;z-index:100}
+.hi{max-width:480px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.bt{background:#3a7d44;color:#fff;border-radius:20px;padding:4px 14px;font-size:14px;font-weight:900}
+.l1{font-weight:900;font-size:15px;color:#1a1a1a}
+.l2{font-weight:900;font-size:15px;color:#3a7d44}
+.hbtn{padding:6px 12px;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-family:inherit;font-weight:700}
+.pw{max-width:480px;margin:8px auto 0}
+.pb{height:4px;background:#f0f0f0;border-radius:99px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,#a78bfa,#c4b5fd);border-radius:99px;transition:width .4s;width:0%}
+.wr{max-width:480px;margin:0 auto;padding:16px}
+.cd{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:16px}
+.tg{display:inline-block;color:#fff;border-radius:99px;padding:3px 12px;font-size:12px;font-weight:700}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.ct{font-size:13px;color:#aaa}
+.btn{border:none;border-radius:10px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:15px;padding:13px 20px;width:100%;margin-top:12px;transition:all .18s}
+.rb{border-radius:10px;padding:12px;font-size:14px;margin-top:10px}
+.rc{background:#e8f5e9;border:1px solid #4caf50;color:#2e7d32}
+.rw{background:#fce4e4;border:1px solid #e8566a;color:#c62828}
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vi{padding:10px 12px;border-radius:10px;cursor:pointer;background:#fafafa;border:1.5px solid #eee;transition:all .2s}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.cc{border:1.5px solid #ddd;border-radius:10px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-size:14px;padding:12px;background:#f5f5f5;color:#333;text-align:left;font-weight:500;transition:all .18s}
+.ox-g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ob{border:2px solid #ddd;border-radius:10px;cursor:pointer;font-size:28px;font-weight:700;padding:18px;background:#f5f5f5;color:#555;transition:all .18s}
+.ma{background:#e3f2fd;border:1.5px solid #90caf9;border-radius:10px;padding:12px;margin-top:10px;font-size:14px;color:#1565c0}
+textarea{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:10px;font-size:14px;outline:none;resize:vertical;font-family:'Noto Sans KR',sans-serif;line-height:1.8}
+.passage-box{font-size:14px;line-height:1.9;color:#333;white-space:pre-wrap;font-family:Georgia,serif;background:#f9f9f9;border-radius:10px;padding:14px;border:1px solid #eee;margin-top:4px}
+.drag-zone{border-radius:12px;padding:12px 10px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;min-height:52px;transition:border .2s}
+.drag-chip{padding:7px 13px;font-size:14px;font-weight:700;border-radius:8px;cursor:grab;user-select:none;touch-action:none;box-shadow:0 1px 4px rgba(0,0,0,.08);display:flex;align-items:center;gap:4px;transition:transform .15s,box-shadow .15s}
+.loading-dots{display:flex;justify-content:center;gap:6px;margin-top:16px}
+.dot{width:10px;height:10px;border-radius:50%;background:#a78bfa;animation:bn 1s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes bn{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-8px);opacity:1}}
+.share-card{background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:16px;padding:20px;margin-bottom:16px}
+.hint-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:10px 14px;margin-bottom:16px}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hi">
+    <div class="bt">T. 진주</div>
+    <div><div class="l1">얘들아,</div><div class="l2">제발 공부하자 😤</div></div>
+    <div id="hdrBtns" style="margin-left:auto;display:none;gap:6px"></div>
+  </div>
+  <div class="pw" id="pwrap" style="display:none">
+    <div class="pb"><div class="pf" id="pf"></div></div>
+  </div>
+</div>
+<div class="wr" id="wr"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// API KEY — 여기에 선생님 API 키를 입력하세요
+// ═══════════════════════════════════════════════
+var API_KEY = "YOUR_API_KEY_HERE";
+
+var DATA = null, PASSAGE = "", phase = "input";
+var PP={input:0,summary:1,vocab:2,vocabquiz:3,topic:4,ox:5,translation:6,unscramble:7,grammar:8,fillblank:9,done:10};
+var TOTAL=10;
+
+// ── TTS ──────────────────────────────────────────
+function sp(t){
+  try{if(window.responsiveVoice){window.responsiveVoice.speak(t,"US English Female",{rate:.9});return}}catch(e){}
+  try{if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;var v=window.speechSynthesis.getVoices();var b=v.find(function(x){return x.name.includes("Samantha")||x.name.includes("Google US")})||v.find(function(x){return x.lang==="en-US"});if(b)u.voice=b;window.speechSynthesis.speak(u)}catch(e){}
+}
+
+// ── API ──────────────────────────────────────────
+var SYSTEM = "You are a Korean English teacher. Given a passage, generate exercises as JSON only. No markdown, no code fences, no explanation. Pure JSON only.\n\n{\"title\":\"passage title\",\"topic\":\"주제 한국어\",\"purpose\":\"목적 한국어\",\"summary\":[\"요약1\",\"요약2\",\"요약3\"],\"vocabulary\":[{\"word\":\"plant\",\"pos\":\"동\",\"meaning\":\"심다\"}],\"vocab_quiz\":[{\"word\":\"plant\",\"choices\":[\"심다\",\"모으다\",\"가르치다\",\"다치게 하다\"],\"answer\":\"심다\"}],\"topic_choice\":{\"question\":\"이 글의 주제로 가장 적절한 것은?\",\"choices\":[\"정답주제\",\"오답1\",\"오답2\",\"오답3\"],\"answer\":\"정답주제\"},\"ox\":[{\"statement\":\"진술문\",\"answer\":true}],\"translation\":[{\"sentence\":\"English sentence\",\"answer\":\"한국어 해석\"}],\"unscramble\":[{\"original\":\"Full sentence\",\"translation\":\"한국어 해석\",\"words\":[\"w1\",\"w2\",\"w3\"],\"korean_words\":[\"한1\",\"한2\",\"한3\"],\"korean_answer\":\"한1 한2 한3\",\"label\":\"주제\"}],\"grammar\":[{\"sentence_before\":\"He\",\"choice_a\":\"goes\",\"choice_b\":\"going\",\"sentence_after\":\"there.\",\"answer\":\"A\",\"explanation\":\"설명\"}],\"fillblank\":[{\"question\":\"Sentence with ___ here.\",\"answer\":\"word\",\"choices\":[\"word\",\"w2\",\"w3\",\"w4\"],\"hint\":\"힌트\"}]}\n\nGenerate: topic_choice(4 choices), 5 ox, 2 translation, 3 unscramble(labels:주제/요지/핵심 문법, each with translation+words+korean_words+korean_answer), 5 grammar, 3 fillblank, 10 vocabulary, 10 vocab_quiz. For unscramble korean_words: split Korean translation into 3~6 meaningful chunks scrambled.";
+
+async function callAPI(passage) {
+  var res = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST",
+    headers:{"Content-Type":"application/json","x-api-key":API_KEY,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:3500,system:SYSTEM,messages:[{role:"user",content:"Passage:\n"+passage}]})
+  });
+  var d = await res.json();
+  return JSON.parse((d.content||[]).map(function(c){return c.text||""}).join("").trim());
+}
+
+// ── 유틸 ─────────────────────────────────────────
+function sf(a){return[...a].sort(function(){return Math.random()-.5})}
+function el(id){return document.getElementById(id)}
+function btn(label,fn,bg,mt){return'<button class="btn" style="background:'+(bg||"#a78bfa")+';color:#fff'+(mt===false?";margin-top:0":"")+'" onclick="'+fn+'">'+label+'</button>'}
+function rb(correct,answer){return'<div class="rb '+(correct?"rc":"rw")+'">'+(correct?"✓ 정답!":"✗ 오답 — 정답: "+answer)+'</div>'}
+
+function setPhase(p){
+  phase=p;
+  var pct=Math.round((PP[p]||0)/TOTAL*100);
+  el("pf").style.width=pct+"%";
+  el("pwrap").style.display=p==="input"?"none":"block";
+  var hb=el("hdrBtns");
+  if(p==="input"){hb.style.display="none"}
+  else{
+    hb.style.display="flex";
+    hb.innerHTML='<button class="hbtn" style="background:#e0f2fe;color:#0891b2" onclick="resetSame()">🔄 다시 풀기</button><button class="hbtn" style="background:#f0f0f0;color:#666" onclick="resetFull()">새 지문</button>';
+  }
+  render();
+}
+
+function resetSame(){if(DATA)setPhase("summary")}
+function resetFull(){DATA=null;PASSAGE="";setPhase("input")}
+
+// ── 공유 링크 생성 ────────────────────────────────
+function copyShareLink(){
+  try{
+    var encoded=btoa(unescape(encodeURIComponent(JSON.stringify({data:DATA,passage:PASSAGE}))));
+    var url=window.location.origin+window.location.pathname+"?q="+encoded;
+    navigator.clipboard.writeText(url).then(function(){showToast("🔗 링크 복사됨! 카톡에 붙여넣으세요")}).catch(function(){prompt("링크를 복사하세요:",url)});
+  }catch(e){showToast("링크 생성 실패")}
+}
+
+function showToast(msg){
+  var t=document.getElementById("toast");
+  if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;z-index:999;font-family:'Noto Sans KR',sans-serif";document.body.appendChild(t)}
+  t.textContent=msg;t.style.display="block";setTimeout(function(){t.style.display="none"},2500);
+}
+
+// ── URL에서 데이터 로드 ────────────────────────────
+function loadFromURL(){
+  var params=new URLSearchParams(window.location.search);
+  var q=params.get("q");
+  if(q){
+    try{
+      var parsed=JSON.parse(decodeURIComponent(escape(atob(q))));
+      DATA=parsed.data; PASSAGE=parsed.passage;
+      setPhase("summary"); return true;
+    }catch(e){}
+  }
+  return false;
+}
+
+// ── 렌더 ─────────────────────────────────────────
+function render(){
+  var w=el("wr");w.innerHTML="";
+  var m={input:rInput,summary:rSum,vocab:rVoc,vocabquiz:rVQ,topic:rTop,ox:rOX,translation:rTr,unscramble:rUs,grammar:rGr,fillblank:rFb,done:rDone};
+  if(m[phase])m[phase](w);
+}
+
+// ── 입력 화면 ─────────────────────────────────────
+function rInput(w){
+  w.innerHTML='<div class="cd"><h2 style="font-size:18px;font-weight:700;color:#222;margin-bottom:6px">지문을 입력하세요</h2><p style="font-size:13px;color:#888;margin-bottom:14px">영어 지문을 붙여넣으면 자동으로 문제를 만들어드려요!</p><textarea id="pinput" rows="8" placeholder="Leo loved plants very much..."></textarea><div id="perr" style="color:#e8566a;font-size:13px;margin-top:8px"></div>'+btn("문제 만들기 ✨","genQuiz()")+'<div class="loading-dots" id="ldots" style="display:none"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+}
+
+async function genQuiz(){
+  var input=el("pinput").value.trim();
+  if(!input)return;
+  if(API_KEY==="YOUR_API_KEY_HERE"){el("perr").textContent="⚠️ API 키를 입력해주세요!";return}
+  PASSAGE=input;
+  el("perr").textContent="";
+  var gb=document.querySelector(".btn");
+  gb.disabled=true;gb.textContent="⏳ 문제 생성 중...";
+  el("ldots").style.display="flex";
+  try{
+    DATA=await callAPI(input);
+    setPhase("summary");
+  }catch(e){
+    el("perr").textContent="오류가 발생했어요. 다시 시도해 주세요.";
+    gb.disabled=false;gb.textContent="문제 만들기 ✨";
+    el("ldots").style.display="none";
+  }
+}
+
+// ── 핵심 정리 ─────────────────────────────────────
+function rSum(w){
+  var d=DATA,h="";
+  h+='<div class="cd"><div style="margin-bottom:10px"><span class="tg" style="background:#0891b2">📖 원문 지문</span></div><div class="passage-box">'+PASSAGE.replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</div></div>';
+  h+='<div class="cd"><div style="margin-bottom:14px"><span class="tg" style="background:#e8566a">지문 핵심 정리</span></div>';
+  [["제목",d.title],["주제",d.topic],["목적",d.purpose]].forEach(function(x){h+='<div style="display:flex;gap:10px;margin-bottom:8px;font-size:14px"><span style="color:#e8566a;font-weight:700;min-width:28px">'+x[0]+'</span><span style="color:#333">'+x[1]+'</span></div>'});
+  h+='<div style="display:flex;gap:10px;margin-top:6px"><span style="color:#e8566a;font-weight:700;min-width:56px;font-size:14px">세줄 요약</span><div>';
+  (d.summary||[]).forEach(function(s,i){h+='<div style="font-size:14px;color:#444;margin-bottom:4px">'+["①","②","③"][i]+" "+s+"</div>"});
+  h+='</div></div></div>';
+  h+='<div class="share-card"><p style="font-size:14px;font-weight:700;color:#7c3aed;margin-bottom:6px">📤 학생들에게 공유하기</p><p style="font-size:12px;color:#888;margin-bottom:12px">링크를 복사해서 카톡으로 보내세요!<br>학생이 링크 클릭하면 바로 문제가 열려요 ✅</p>'+btn("🔗 링크 복사해서 공유하기","copyShareLink()","#7c3aed")+'</div>';
+  h+=btn("문제 풀기 시작 →","setPhase('vocab')");
+  w.innerHTML=h;
+}
+
+// ── 어휘 목록 ─────────────────────────────────────
+function rVoc(w){
+  var h='<div class="cd"><div style="margin-bottom:10px"><span class="tg" style="background:#e8566a">주요 어휘 🔊</span></div><p style="font-size:12px;color:#aaa;margin-bottom:12px">단어를 탭하면 발음을 들을 수 있어요</p><div class="vg">';
+  (DATA.vocabulary||[]).forEach(function(v,i){
+    h+='<div class="vi" id="vi'+i+'" onclick="spV(\''+v.word.replace(/'/g,"\\'")+'\',' +i+')"><div style="font-weight:700;font-size:14px;color:#222">'+v.word+'</div><div style="font-size:12px;color:#888"><span style="color:#e8566a">['+v.pos+']</span> '+v.meaning+'</div></div>';
+  });
+  h+='</div></div>'+btn("어휘 퀴즈 풀기 →","setPhase('vocabquiz')");
+  w.innerHTML=h;
+}
+function spV(word,i){sp(word);var d=el("vi"+i);if(d){d.style.background="#fff0f1";d.style.borderColor="#e8566a";setTimeout(function(){d.style.background="#fafafa";d.style.borderColor="#eee"},900)}}
+
+// ── 어휘 퀴즈 ─────────────────────────────────────
+var vqi=0,vqc=null,vqf=false,vqsh=[];
+function rVQ(w){
+  var items=DATA.vocab_quiz||[];
+  if(vqi>=items.length){w.innerHTML='<div class="cd"><p style="text-align:center;font-size:18px">어휘 퀴즈 완료! 📚</p>'+btn("다음 →","goTop()")+'</div>';return}
+  var item=items[vqi];
+  if(!vqsh[vqi])vqsh[vqi]=sf(item.choices);
+  var ch=vqsh[vqi],cor=vqc===item.answer;
+  var h='<div class="cd"><div class="sh"><span class="tg" style="background:#6d28d9">어휘 퀴즈</span><span class="ct">'+(vqi+1)+"/"+items.length+'</span></div>';
+  h+='<p onclick="sp(\''+item.word+'\')" style="font-size:28px;font-weight:900;color:#222;text-align:center;margin-bottom:20px;cursor:pointer">'+item.word+' 🔊</p><div class="cg">';
+  ch.forEach(function(c){
+    var bg="#f5f5f5",bo="1.5px solid #ddd",co="#333";
+    if(vqf){if(c===item.answer){bg="#e8f5e9";bo="1.5px solid #4caf50";co="#2e7d32"}else if(c===vqc){bg="#fce4e4";bo="1.5px solid #e8566a";co="#c62828"}}
+    else if(c===vqc){bg="#f3eeff";bo="1.5px solid #6d28d9";co="#6d28d9"}
+    h+='<button class="cc" style="background:'+bg+';border:'+bo+';color:'+co+'" onclick="pickVQ(this,\''+c.replace(/'/g,"\\'")+'\')">'+ c+'</button>';
+  });
+  h+='</div>';
+  if(!vqf&&vqc)h+=btn("확인","confVQ()","#6d28d9");
+  if(vqf)h+=rb(cor,item.answer)+btn("다음 →","nextVQ()");
+  h+='</div>';w.innerHTML=h;
+}
+function pickVQ(el,c){if(vqf)return;vqc=c;rVQ(document.getElementById("wr"))}
+function confVQ(){vqf=true;rVQ(el("wr"))}
+function nextVQ(){vqi++;vqc=null;vqf=false;rVQ(el("wr"))}
+function goTop(){vqi=0;vqc=null;vqf=false;vqsh=[];setPhase("topic")}
+
+// ── 주제 고르기 ───────────────────────────────────
+var tc=null,tf=false,ts=[];
+function rTop(w){
+  var item=DATA.topic_choice;if(!item){setPhase("ox");return}
+  if(!ts.length)ts=sf(item.choices);
+  var h='<div class="cd"><div class="sh"><span class="tg" style="background:#7c3aed">주제 고르기</span></div><p style="font-size:15px;color:#333;line-height:1.8;margin-bottom:20px;font-weight:600">'+item.question+'</p><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px">';
+  ts.forEach(function(ch,i){
+    var bg="#f5f5f5",bo="1.5px solid #ddd",co="#333";
+    if(tf){if(ch===item.answer){bg="#e8f5e9";bo="1.5px solid #4caf50";co="#2e7d32"}else if(ch===tc){bg="#fce4e4";bo="1.5px solid #e8566a";co="#c62828"}}
+    else if(ch===tc){bg="#f3eeff";bo="1.5px solid #7c3aed";co="#7c3aed"}
+    h+='<button class="cc" style="background:'+bg+';border:'+bo+';color:'+co+'" onclick="pickTop('+i+')">'+["①","②","③","④"][i]+" "+ch+'</button>';
+  });
+  h+='</div>';
+  if(!tf&&tc)h+=btn("확인","confTop()","#7c3aed");
+  if(tf)h+=rb(tc===item.answer,item.answer)+btn("다음 →","goOX()");
+  h+='</div>';w.innerHTML=h;
+}
+function pickTop(i){if(tf)return;tc=ts[i];rTop(el("wr"))}
+function confTop(){tf=true;rTop(el("wr"))}
+function goOX(){tc=null;tf=false;ts=[];setPhase("ox")}
+
+// ── OX ───────────────────────────────────────────
+var oi=0,ores=null;
+function rOX(w){
+  var items=DATA.ox||[];
+  if(oi>=items.length){w.innerHTML='<div class="cd"><p style="text-align:center;font-size:18px">OX 완료! 🎉</p>'+btn("다음 →","goTr()")+'</div>';return}
+  var item=items[oi],ic=ores===item.answer;
+  var h='<div class="cd"><div class="sh"><span class="tg" style="background:#e8566a">OX 문제</span><span class="ct">'+(oi+1)+"/"+items.length+'</span></div><p style="font-size:15px;line-height:1.8;color:#333;margin-bottom:20px">'+item.statement+'</p><div class="ox-g">';
+  [true,false].forEach(function(v){
+    var bg="#f5f5f5",bo="2px solid #ddd",co="#555";
+    if(ores!==null&&ores===v){bg=ic?"#e8f5e9":"#fce4e4";bo=ic?"2px solid #4caf50":"2px solid #e8566a";co=ic?"#2e7d32":"#c62828"}
+    h+='<button class="ob" style="background:'+bg+';border:'+bo+';color:'+co+'" onclick="pickOX('+(v?"true":"false")+')">'+( v?"O":"X")+'</button>';
+  });
+  h+='</div>';
+  if(ores!==null)h+='<p style="text-align:center;margin-top:12px;font-weight:700;color:'+(ic?"#4caf50":"#e8566a")+'">'+(ic?"✓ 정답!":"✗ 오답 — 정답:"+(item.answer?"O":"X"))+'</p>';
+  h+='</div>';w.innerHTML=h;
+}
+function pickOX(v){if(ores!==null)return;ores=(v==="true"||v===true);rOX(el("wr"));setTimeout(function(){oi++;ores=null;rOX(el("wr"))},900)}
+function goTr(){oi=0;ores=null;setPhase("translation")}
+
+// ── 해석 ─────────────────────────────────────────
+var ti=0,tsh=false;
+function rTr(w){
+  var items=DATA.translation||[];
+  if(ti>=items.length){w.innerHTML='<div class="cd"><p style="text-align:center;font-size:18px">해석 완료! ✅</p>'+btn("다음 →","goUs()")+'</div>';return}
+  var item=items[ti];
+  var h='<div class="cd"><div class="sh"><span class="tg" style="background:#3a7d44">한국어 해석</span><span class="ct">'+(ti+1)+"/"+items.length+'</span></div>';
+  h+='<p onclick="sp(\''+item.sentence.replace(/'/g,"\\'")+'\' )" style="font-size:16px;font-weight:600;color:#222;line-height:1.7;margin-bottom:16px;cursor:pointer">🔊 '+item.sentence+'</p>';
+  h+='<textarea id="tri" rows="3" placeholder="한국어 해석을 입력하세요..." '+(tsh?"disabled":"")+'></textarea>';
+  if(!tsh)h+=btn("정답 확인","confTr()");
+  else h+='<div class="ma"><strong>모범 답안:</strong> '+item.answer+'</div>'+btn("다음 →","nextTr()");
+  h+='</div>';w.innerHTML=h;
+}
+function confTr(){var v=el("tri");if(!v||!v.value.trim())return;tsh=true;rTr(el("wr"))}
+function nextTr(){ti++;tsh=false;rTr(el("wr"))}
+function goUs(){ti=0;tsh=false;setPhase("unscramble")}
+
+// ── Unscramble (드래그) ────────────────────────────
+var ui=0,uEn=[],uKr=[],uEnDone=false,uKrDone=false;
+var dragId=null,touchDragId=null,touchOverId=null;
+
+function mkTokens(words,prefix){return sf(words).map(function(w,i){return{w:w,id:prefix+i+"_"+w}})}
+function initUs(){
+  var item=DATA.unscramble[ui];
+  uEn=mkTokens(item.words,"en");
+  uKr=mkTokens(item.korean_words||[],"kr");
+  uEnDone=false;uKrDone=false;
+}
+
+function rUs(w){
+  var items=DATA.unscramble||[];
+  if(ui>=items.length){w.innerHTML='<div class="cd"><p style="text-align:center;font-size:18px">Unscramble 완료! 🌟</p>'+btn("다음 →","goGr()")+'</div>';return}
+  if(!uEn.length)initUs();
+  var item=items[ui];
+  var enStr=uEn.map(function(t){return t.w}).join(" ");
+  var krStr=uKr.map(function(t){return t.w}).join(" ");
+  var enOk=uEnDone&&enStr===item.original;
+  var krOk=uKrDone&&krStr===item.korean_answer;
+  var lc={"주제":"#e8566a","요지":"#d97706","핵심 문법":"#0891b2"}[item.label]||"#0891b2";
+
+  var h='<div class="cd">';
+  h+='<div class="sh"><div style="display:flex;gap:6px;align-items:center"><span class="tg" style="background:'+lc+'">'+(item.label||"Unscramble")+'</span><span style="background:#eee;color:#666;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700">순서 배열</span></div><span class="ct">'+(ui+1)+"/"+items.length+'</span></div>';
+
+  // 해석 박스
+  h+='<div class="hint-box"><span style="font-size:11px;color:#d97706;font-weight:700;margin-right:6px">해석</span><span style="font-size:14px;color:#333;line-height:1.7">'+item.translation+'</span></div>';
+
+  // 1단계: 영어
+  h+='<p style="font-size:13px;font-weight:700;color:#0891b2;margin-bottom:8px">1단계 🇺🇸 영어 순서 배열'+(uEnDone?'<span style="margin-left:8px;font-size:12px;color:'+(enOk?"#4caf50":"#e8566a")+'">'+(enOk?"✓ 정답!":"✗ 오답")+'</span>':"")+'</p>';
+  h+='<p style="font-size:11px;color:#bbb;margin-bottom:8px">단어를 드래그해서 순서를 맞추세요</p>';
+  h+=renderDragZone(uEn,uEnDone,enOk,"en","#0891b2","#f0f9ff");
+  if(!uEnDone){
+    h+='<div style="display:flex;gap:8px">'+btn("초기화","rstEn()","#888",false)+btn("확인","confEn()","#0891b2",false)+'</div>';
+  } else if(!enOk){
+    h+='<div style="font-size:13px;color:#888;margin-top:8px;padding:8px 12px;background:#f9f9f9;border-radius:8px">정답: <span style="color:#0891b2;font-weight:700">'+item.original+'</span></div>';
+    h+=btn("🔄 다시 풀기","rstEn()","#0891b2");
+  }
+
+  // 2단계: 한국어 (영어 확인 후)
+  if(uEnDone){
+    h+='<div style="margin-top:16px;padding-top:16px;border-top:1.5px dashed #eee">';
+    h+='<p style="font-size:13px;font-weight:700;color:#d97706;margin-bottom:8px">2단계 🇰🇷 한국어 순서 배열'+(uKrDone?'<span style="margin-left:8px;font-size:12px;color:'+(krOk?"#4caf50":"#e8566a")+'">'+(krOk?"✓ 정답!":"✗ 오답")+'</span>':"")+'</p>';
+    h+='<p style="font-size:11px;color:#bbb;margin-bottom:8px">한국어 덩어리를 드래그해서 올바른 순서로 배열하세요</p>';
+    h+=renderDragZone(uKr,uKrDone,krOk,"kr","#d97706","#fffbeb");
+    if(!uKrDone){
+      h+='<div style="display:flex;gap:8px">'+btn("초기화","rstKr()","#888",false)+btn("확인","confKr()","#d97706",false)+'</div>';
+    } else {
+      if(!krOk){
+        h+='<div style="font-size:13px;color:#888;margin-top:8px;padding:8px 12px;background:#f9f9f9;border-radius:8px">정답: <span style="color:#d97706;font-weight:700">'+item.korean_answer+'</span></div>';
+        h+=btn("🔄 다시 풀기","rstKr()","#d97706");
+      }
+      h+=btn("다음 →","nextUs()");
+    }
+    h+='</div>';
+  }
+  h+='</div>';
+  w.innerHTML=h;
+  addDragEvents();
+}
+
+function renderDragZone(tokens,confirmed,correct,prefix,ac,bg){
+  var borderColor=confirmed?(correct?"#4caf50":"#e8566a"):ac;
+  var zoneBg=confirmed?(correct?"#f0fdf4":"#fff5f5"):bg;
+  var h='<div class="drag-zone" id="dz_'+prefix+'" style="border:2px dashed '+borderColor+';background:'+zoneBg+'">';
+  tokens.forEach(function(tok){
+    var chipBg=confirmed?(correct?"#e8f5e9":"#fce4e4"):"#fff";
+    var chipBo=confirmed?(correct?"1.5px solid #4caf50":"1.5px solid #e8566a"):"1.5px solid "+ac;
+    var chipCo=confirmed?(correct?"#2e7d32":"#c62828"):ac;
+    h+='<div class="drag-chip" id="chip_'+tok.id+'" data-id="'+tok.id+'" data-prefix="'+prefix+'" draggable="true" style="background:'+chipBg+';border:'+chipBo+';color:'+chipCo+'">';
+    if(!(confirmed&&correct))h+='<span style="opacity:.35;font-size:11px">⠿</span>';
+    h+=tok.w+'</div>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function addDragEvents(){
+  document.querySelectorAll(".drag-chip").forEach(function(chip){
+    chip.addEventListener("dragstart",function(e){dragId=this.dataset.id;e.dataTransfer.effectAllowed="move"});
+    chip.addEventListener("dragover",function(e){e.preventDefault()});
+    chip.addEventListener("drop",function(e){
+      e.preventDefault();
+      if(!dragId||dragId===this.dataset.id)return;
+      var prefix=this.dataset.prefix;
+      swapTokens(prefix,dragId,this.dataset.id);
+      dragId=null;rUs(el("wr"));
+    });
+    chip.addEventListener("dragend",function(){dragId=null});
+    // 터치
+    chip.addEventListener("touchstart",function(e){touchDragId=this.dataset.id},{passive:true});
+    chip.addEventListener("touchmove",function(e){
+      e.preventDefault();
+      var t=e.touches[0];
+      var els=document.elementsFromPoint(t.clientX,t.clientY);
+      var over=els.find(function(x){return x.classList.contains("drag-chip")&&x.dataset.id!==touchDragId});
+      touchOverId=over?over.dataset.id:null;
+    },{passive:false});
+    chip.addEventListener("touchend",function(){
+      if(touchDragId&&touchOverId&&touchDragId!==touchOverId){
+        var prefix=this.dataset.prefix;
+        swapTokens(prefix,touchDragId,touchOverId);
+        rUs(el("wr"));
+      }
+      touchDragId=null;touchOverId=null;
+    });
+  });
+}
+
+function swapTokens(prefix,id1,id2){
+  var arr=prefix==="en"?uEn:uKr;
+  var i1=arr.findIndex(function(t){return t.id===id1});
+  var i2=arr.findIndex(function(t){return t.id===id2});
+  if(i1<0||i2<0)return;
+  var tmp=arr[i1];arr[i1]=arr[i2];arr[i2]=tmp;
+}
+
+function rstEn(){var item=DATA.unscramble[ui];uEn=mkTokens(item.words,"en");uEnDone=false;rUs(el("wr"))}
+function rstKr(){var item=DATA.unscramble[ui];uKr=mkTokens(item.korean_words||[],"kr");uKrDone=false;rUs(el("wr"))}
+function confEn(){
+  uEnDone=true;
+  var item=DATA.unscramble[ui];
+  if(uEn.map(function(t){return t.w}).join(" ")===item.original)sp(item.original);
+  rUs(el("wr"));
+}
+function confKr(){uKrDone=true;rUs(el("wr"))}
+function nextUs(){ui++;uEn=[];uKr=[];uEnDone=false;uKrDone=false;rUs(el("wr"))}
+function goGr(){ui=0;uEn=[];uKr=[];setPhase("grammar")}
+
+// ── 문법 양자택일 ─────────────────────────────────
+var gi=0,gc=null,gf=false;
+function rGr(w){
+  var items=DATA.grammar||[];
+  if(gi>=items.length){w.innerHTML='<div class="cd"><p style="text-align:center;font-size:18px">문법 완료! 📝</p>'+btn("다음 →","goFb()")+'</div>';return}
+  var item=items[gi],cor=gc===item.answer;
+  var h='<div class="cd"><div class="sh"><span class="tg" style="background:#be185d">문법 양자택일</span><span class="ct">'+(gi+1)+"/"+items.length+'</span></div>';
+  h+='<p style="font-size:13px;color:#888;margin-bottom:14px">알맞은 것을 고르시오.</p>';
+  h+='<div style="font-size:15px;color:#333;line-height:2;margin-bottom:20px;padding:14px;background:#f9f9f9;border-radius:10px">'+item.sentence_before+' ';
+  ["A","B"].forEach(function(ab){
+    var opt=ab==="A"?item.choice_a:item.choice_b;
+    var bg="#f0f0f0",bo="1.5px solid #ddd",co="#333";
+    if(gf){if(ab===item.answer){bg="#e8f5e9";bo="1.5px solid #4caf50";co="#2e7d32"}else if(ab===gc){bg="#fce4e4";bo="1.5px solid #e8566a";co="#c62828"}}
+    else if(ab===gc){bg="#fce7f3";bo="1.5px solid #be185d";co="#be185d"}
+    h+='<button onclick="pickGr(\''+ab+'\')" style="background:'+bg+';border:'+bo+';color:'+co+';border-radius:8px;padding:4px 12px;font-size:14px;font-weight:700;cursor:'+(gf?"default":"pointer")+';font-family:inherit;margin:0 3px">('+ab+') '+opt+'</button>';
+  });
+  h+=' '+item.sentence_after+'</div>';
+  if(!gf&&gc)h+=btn("확인","confGr()","#be185d");
+  if(gf){
+    var ans=item.answer==="A"?item.choice_a:item.choice_b;
+    h+='<div class="rb '+(cor?"rc":"rw")+'">'+(cor?"✓ 정답! ":"✗ 오답 — 정답: ("+item.answer+") ")+ans+'<div style="font-size:12px;color:#555;margin-top:6px">'+item.explanation+'</div></div>'+btn("다음 →","nextGr()");
+  }
+  h+='</div>';w.innerHTML=h;
+}
+function pickGr(v){if(gf)return;gc=v;rGr(el("wr"))}
+function confGr(){gf=true;rGr(el("wr"))}
+function nextGr(){gi++;gc=null;gf=false;rGr(el("wr"))}
+function goFb(){gi=0;gc=null;gf=false;setPhase("fillblank")}
+
+// ── 빈칸 채우기 ───────────────────────────────────
+var fi=0,fc=null,ff=false,fsh=[];
+function rFb(w){
+  var items=DATA.fillblank||[];
+  if(fi>=items.length){w.innerHTML='<div class="cd"><p style="text-align:center;font-size:18px">빈칸 완료! 🎯</p>'+btn("완료 →","setPhase('done')")+'</div>';return}
+  var item=items[fi];
+  if(!fsh[fi])fsh[fi]=sf(item.choices);
+  var ch=fsh[fi],cor=fc===item.answer;
+  var parts=item.question.split("___");
+  var sent=parts.map(function(p,i){return i<parts.length-1?p+'<span style="display:inline-block;min-width:70px;border-bottom:2px solid '+(ff?(cor?"#4caf50":"#e8566a"):"#d97706")+';color:'+(ff?(cor?"#4caf50":"#e8566a"):"#d97706")+';text-align:center;font-weight:700;padding:0 4px">'+(fc||"　　")+'</span>':p}).join("");
+  var h='<div class="cd"><div class="sh"><span class="tg" style="background:#d97706">빈칸 채우기</span><span class="ct">'+(fi+1)+"/"+items.length+'</span></div>';
+  h+='<p style="font-size:13px;color:#888;margin-bottom:8px">💡 '+item.hint+'</p>';
+  h+='<p style="font-size:15px;line-height:1.9;color:#333;margin-bottom:20px">'+sent+'</p><div class="cg">';
+  ch.forEach(function(c){
+    var bg="#f5f5f5",bo="1.5px solid #ddd",co="#333";
+    if(ff){if(c===item.answer){bg="#e8f5e9";bo="1.5px solid #4caf50";co="#2e7d32"}else if(c===fc){bg="#fce4e4";bo="1.5px solid #e8566a";co="#c62828"}}
+    else if(c===fc){bg="#fef3c7";bo="1.5px solid #d97706";co="#92400e"}
+    h+='<button class="cc" style="background:'+bg+';border:'+bo+';color:'+co+'" onclick="pickFb(\''+c.replace(/'/g,"\\'")+'\')">'+c+'</button>';
+  });
+  h+='</div>';
+  if(!ff&&fc)h+=btn("확인","confFb()","#d97706");
+  if(ff)h+=rb(cor,item.answer)+btn("다음 →","nextFb()");
+  h+='</div>';w.innerHTML=h;
+}
+function pickFb(c){if(ff)return;fc=c;rFb(el("wr"))}
+function confFb(){ff=true;rFb(el("wr"))}
+function nextFb(){fi++;fc=null;ff=false;rFb(el("wr"))}
+
+// ── 완료 ─────────────────────────────────────────
+function rDone(w){
+  w.innerHTML='<div class="cd"><div style="text-align:center;padding:20px 0"><div style="font-size:56px;margin-bottom:12px">🎉</div><div style="font-size:22px;font-weight:700;color:#222;margin-bottom:8px">모든 문제 완료!</div><div style="color:#888;font-size:14px;margin-bottom:20px">수고했어요! 👏</div>'+btn("🔄 같은 지문 다시 풀기","resetSame()","#0891b2")+btn("새 지문으로 시작하기","resetFull()","#888")+'</div></div>';
+  fi=0;fc=null;ff=false;fsh=[];
+}
+
+// ── 시작 ─────────────────────────────────────────
+if(!loadFromURL()) setPhase("input");
+</script>
+</body>
+</html>
